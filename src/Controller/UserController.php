@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 use App\Dto\UserDto;
 use App\Service\UserService;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
 final class UserController extends AbstractController
@@ -22,9 +23,6 @@ final class UserController extends AbstractController
 
         $this->user_service->store($user_dto);
 
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/UserController.php',
-        ]);
+        return $this->json(['message' => 'User was created with success'],Response::HTTP_CREATED);
     }
 }

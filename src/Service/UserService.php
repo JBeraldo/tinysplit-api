@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Dto\UserDto;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\ObjectMapper\ObjectMapperInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -16,8 +17,8 @@ final class UserService {
     ) {
     }
 
-    public function store(UserDto $user_dto){
-        $user = $this->mapper->map($user_dto);
+    public function store(UserDto $user_dto): void {
+        $user = $this->mapper->map($user_dto); 
 
         $hashed_password = $this->password_hasher->hashPassword(
             $user,
@@ -25,6 +26,7 @@ final class UserService {
         );
 
         $user->setPassword($hashed_password);
+
         $this->user_repository->store($user);
     }
 }

@@ -6,6 +6,8 @@ dev:
 stop:
 	docker compose down
 refresh: stop dev
+analyze:
+	docker compose --env-file $(ENV) exec app vendor/bin/phpstan analyse -l 6 src
 migrate:
 	docker compose --env-file $(ENV) exec app php bin/console make:migration
 migrate-up:

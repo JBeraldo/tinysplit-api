@@ -35,10 +35,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function store(User $user): void
     {
-        if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
-        }
-
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
