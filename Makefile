@@ -2,7 +2,7 @@ ENV = .env.dev.local
 dev:
 	docker run --rm -itv $(shell pwd):/app -w /app composer:2.7.2 composer install --no-scripts --ignore-platform-reqs
 #	docker compose exec app php bin/console lexik:jwt:generate-keypair
-	docker compose up -d
+	docker compose --env-file $(ENV) up -d
 stop:
 	docker compose down
 refresh: stop dev

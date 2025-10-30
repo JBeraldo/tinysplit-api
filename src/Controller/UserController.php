@@ -25,4 +25,13 @@ final class UserController extends AbstractController
 
         return $this->json(['message' => 'User was created with success'],Response::HTTP_CREATED);
     }
+
+    #[Route('/me', name: 'user_self', methods: ['GET'], format: 'json')]
+    public function me(): JsonResponse
+    {
+
+        $userResource = $this->user_service->currentUser();
+
+        return $this->json($userResource, Response::HTTP_OK);
+    }
 }
